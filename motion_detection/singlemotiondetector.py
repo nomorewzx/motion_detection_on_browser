@@ -25,7 +25,7 @@ class SingleMotionDetector:
         # compute the absolute difference between the background model
         # and the image passed in, then threshold the delta image
         delta = cv2.absdiff(self.bg.astype("uint8"), image)
-        thresh = cv2.threshold(delta, tVal, 255, cv2.THRESH_BINARY)[1]
+        _, thresh = cv2.threshold(delta, tVal, 255, cv2.THRESH_BINARY)
 
         # perform a series of erosions and dilations to remove small
         # blobs
