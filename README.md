@@ -15,3 +15,25 @@ This repo uses pipenv to setup virtualenv and manage packages and requires Pytho
 ![Motion Detector Demo](resources/motion_detection.png)
 
 4. Press `Ctrl C` to stop the demo
+
+### Steps of simple motion detection
+The approach of motion detection in this repo is the very simple one. It consists three steps basically.
+
+#### 1. Accumulate background image
+The first step is to collect the background, for example like below, three raw images captured by camera is accumulated averaged using `cv2.accumulateWeighted` to get the basic background image.
+![Accumulated Background Image](resources/accumulated_bg_generation.png)
+
+#### 2. Detect edges of moving object
+The steps of detecting edges of moving object is:
+ 
+a). The difference between background image and newly captured image is calculated using `cv2.absdiff`
+
+b). Threshold method is performed to distinguish the static background pixels and moving object pixels using `cv2.threshold`
+
+c). Basic edge detection method is used to detect edges of moving objects using `cv2.erode` & `cv2.dilate`
+
+Below is the example of detecting edges of moving object
+![Detect edges of moving object](resources/motion_detection_steps_demo.png)
+
+#### 3. Find coordinates of detected objects
+At last, `cv2.findContours` is used to find the contour of moving object and then coordinates of objects is calculated. 
